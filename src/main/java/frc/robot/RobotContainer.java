@@ -12,11 +12,13 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
@@ -30,7 +32,7 @@ public class RobotContainer {
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
     private final XboxController driverJoytick = new XboxController(OIConstants.kDriverControllerPort);
-
+        Trigger aButton = new JoystickButton(driverJoytick, XboxController.Button.kA.value);
     public RobotContainer() {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 swerveSubsystem,
@@ -42,8 +44,13 @@ public class RobotContainer {
         configureButtonBindings();
     }
 
-    private void configureButtonBindings() {
-        new JoystickButton(driverJoytick, 2).whenPressed(() -> swerveSubsystem.resetAllEncoders());
+    private void configureButtonBindings() {  
+        aButton.onTrue( new Command() {
+                @Override
+                public void execute() {
+                        swerveSubsystem.resetAllEncoders();  
+                }
+        } );
     }
 
     public Command getAutonomousCommand() {
