@@ -50,6 +50,7 @@ public class SwerveJoystickCmd extends CommandBase {
         turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
 
         // 3. Make the driving smoother
+        SmartDashboard.putNumber("Speed Modifier", SpeedModifier);
         xSpeed = xLimiter.calculate(xSpeed) * (DriveConstants.kTeleDriveMaxSpeedMetersPerSecond - SpeedModifier);
         ySpeed = yLimiter.calculate(ySpeed) * (DriveConstants.kTeleDriveMaxSpeedMetersPerSecond - SpeedModifier);
         turningSpeed = turningLimiter.calculate(turningSpeed)

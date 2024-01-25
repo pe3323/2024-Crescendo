@@ -28,11 +28,14 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class RobotContainer {
 
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+   
 
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
     private final XboxController driverJoytick = new XboxController(OIConstants.kDriverControllerPort);
         Trigger aButton = new JoystickButton(driverJoytick, XboxController.Button.kA.value);
+        Trigger leftBumper = new JoystickButton(driverJoytick, XboxController.Button.kLeftBumper.value);
+        Trigger rightBumper = new JoystickButton(driverJoytick, XboxController.Button.kRightBumper.value);
     public RobotContainer() {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 swerveSubsystem,
@@ -51,7 +54,32 @@ public class RobotContainer {
                         swerveSubsystem.resetAllEncoders();  
                 }
         } );
-    }
+        leftBumper.onTrue( new Command() {
+                @Override
+                public void execute() {
+                if (SwerveJoystickCmd.SpeedModifier != 3) {
+                        SwerveJoystickCmd.SpeedModifier++;
+                        
+                }
+                
+                }
+
+                public boolean isFinished() {return true;}
+        } );
+
+        rightBumper.onTrue( new Command() {
+                @Override
+                public void execute() {
+                if (SwerveJoystickCmd.SpeedModifier != 0) {
+                        SwerveJoystickCmd.SpeedModifier--;
+                }
+                }
+                public boolean isFinished() {return true;}
+        } );
+}
+
+
+    
 
     public Command getAutonomousCommand() {
         // 1. Create trajectory settings
