@@ -166,6 +166,12 @@ public SwerveModulePosition[] getModulePositions(){
         frontRight.setDesiredState(desiredStates[1]);
         backLeft.setDesiredState(desiredStates[2]);
         backRight.setDesiredState(desiredStates[3]);
+
+        String[] currentStates = {frontLeft.getState().toString(), frontRight.getState().toString(), backLeft.getState().toString(), backRight.getState().toString()};
+        SmartDashboard.putStringArray("Current States", currentStates);
+
+        String[] targetStates = {desiredStates[0].toString(), desiredStates[1].toString(), desiredStates[2].toString(), desiredStates[3].toString()};
+        SmartDashboard.putStringArray("Target States", targetStates);
     }
 
 
