@@ -13,6 +13,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +22,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 public class SwerveSubsystem extends SubsystemBase {
+    
+    StructArrayPublisher<SwerveModuleState> publisher = NetworkTableInstance.getDefault()
+        .getStructArrayTopic("current states", SwerveModuleState.struct).publish();
+
+    StructArrayPublisher<SwerveModuleState> publisher2 = NetworkTableInstance.getDefault()
+    .getStructArrayTopic("Desired states", SwerveModuleState.struct).publish();
+
     private final SwerveModule frontLeft = new SwerveModule(
             DriveConstants.kFrontLeftDriveMotorPort,
             DriveConstants.kFrontLeftTurningMotorPort,
@@ -167,11 +176,14 @@ public SwerveModulePosition[] getModulePositions(){
         backLeft.setDesiredState(desiredStates[2]);
         backRight.setDesiredState(desiredStates[3]);
 
-        String[] currentStates = {frontLeft.getState().toString(), frontRight.getState().toString(), backLeft.getState().toString(), backRight.getState().toString()};
-        SmartDashboard.putStringArray("Current States", currentStates);
+        SwerveModuleState[] currentStates = {frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState()};
+        
+    publisher.set(currentStates);
+    publisher2.set(desiredStates);
+        
 
-        String[] targetStates = {desiredStates[0].toString(), desiredStates[1].toString(), desiredStates[2].toString(), desiredStates[3].toString()};
-        SmartDashboard.putStringArray("Target States", targetStates);
+        
+        
     }
 
 
