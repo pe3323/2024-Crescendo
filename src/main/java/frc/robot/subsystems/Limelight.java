@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -22,6 +23,8 @@ public class Limelight extends SubsystemBase {
     NetworkTableEntry ta;
     NetworkTableEntry tid;
   /** Creates a new ExampleSubsystem. */
+
+  
   public Limelight() {
 
     
@@ -69,6 +72,7 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", y);
     SmartDashboard.putNumber("LimelightArea", area);
     SmartDashboard.putNumber("AprilTagID", id);
+    SmartDashboard.putNumber("distancetoApT", getDistanceToTag((int) id));
   }
 
   @Override
@@ -82,5 +86,30 @@ public class Limelight extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public double getAngle() {
+    double a1 = Constants.VisionConstants.cameraAngle;
+    double a2 = ty.getDouble(0.0);
+    double totalAngle = a1 + a2;
+    
+    return (Math.PI/180.0) * totalAngle;
+  }
+
+  public double getDistanceToTag(int tagID) {
+    if (getClosestAprilTag()==tagID){
+        
+        return (Constants.VisionConstants.apriltagHeight - Constants.VisionConstants.cameraHeight)/ Math.tan(getAngle());
+        
+    };
+
+      
+    
+    
+    return 0.0;
+  }
+  
+  public int getClosestAprilTag() {
+    return (int)tid.getInteger(0);
   }
 }

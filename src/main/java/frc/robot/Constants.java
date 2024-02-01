@@ -109,4 +109,11 @@ public final class Constants {
 
         public static final double kDeadband = 0.3;
     }
+
+    public static final class VisionConstants {
+        public static final double cameraHeight = 11.75; //Inches
+        public static final double apriltagHeight = 54.0; //Inches
+        public static final double cameraAngle = 22.5; //Degrees
+
+    }
 }
