@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoTarget;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -36,6 +37,7 @@ public class RobotContainer {
         Trigger leftBumper = new JoystickButton(driverJoytick, XboxController.Button.kLeftBumper.value);
         Trigger rightBumper = new JoystickButton(driverJoytick, XboxController.Button.kRightBumper.value);
         Trigger xButton = new JoystickButton(driverJoytick, XboxController.Button.kX.value);
+        Trigger yButton = new JoystickButton(driverJoytick, XboxController.Button.kY.value);
 
     public RobotContainer() {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
@@ -55,6 +57,9 @@ public class RobotContainer {
                         swerveSubsystem.resetAllEncoders();  
                 }
         } );
+
+        yButton.onTrue( new AutoTarget(limelightSubsystem, swerveSubsystem) );
+
         leftBumper.onTrue( new Command() {
                 @Override
                 public void execute() {
