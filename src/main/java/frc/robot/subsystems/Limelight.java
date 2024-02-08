@@ -105,7 +105,7 @@ public class Limelight extends SubsystemBase {
   }
 
   public int getClosestAprilTag() {
-    return (int) tid.getInteger(0);
+    return (int) tid.getInteger(-1);
   }
 
   public void turnToTarget(SwerveSubsystem swerveSubsystem) {

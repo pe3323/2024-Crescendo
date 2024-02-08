@@ -44,8 +44,9 @@ public final class Constants {
         public static final int kFrontLeftTurningMotorPort = 2;
         public static final int kBackLeftTurningMotorPort = 8;
         public static final int kFrontRightTurningMotorPort = 4;
-        public static final int kBackRightTurningMotorPort = 6;
+        public static final int kBackRightTurningMotorPort = 6; 
 
+        
         public static final boolean kFrontLeftTurningEncoderReversed = true;
         public static final boolean kBackLeftTurningEncoderReversed = true;
         public static final boolean kFrontRightTurningEncoderReversed = true;
@@ -114,6 +115,12 @@ public final class Constants {
         public static final double cameraHeight = 11.75; //Inches
         public static final double apriltagHeight = 54.0; //Inches
         public static final double cameraAngle = 22.5; //Degrees
-
     }
+
+    public static final class ShooterConstants {
+        
+        public static final int intake = 123457;
+        public static final int shooter = 123457;
+}
+
 }

@@ -34,19 +34,11 @@ public class AutoTarget extends Command {
   
         double xSpeed = 0.0;
         double ySpeed = 0.0;;
-        double turningSpeed = .5;
+        double turningSpeed = limelightSubsystem.getTx() > 0? .5 : -.5;
+        if (isFinished()) {
+    return;
+}
 
-        // 2. Apply deadband
-        xSpeed = Math.abs(xSpeed) > OIConstants.kDeadband ? xSpeed : 0.0;
-        ySpeed = Math.abs(ySpeed) > OIConstants.kDeadband ? ySpeed : 0.0;
-        turningSpeed = Math.abs(turningSpeed) > OIConstants.kDeadband ? turningSpeed : 0.0;
-
-        // 3. Make the driving smoother
-
-        xSpeed = xLimiter.calculate(xSpeed) * (DriveConstants.kTeleDriveMaxSpeedMetersPerSecond - SpeedModifier);
-        ySpeed = yLimiter.calculate(ySpeed) * (DriveConstants.kTeleDriveMaxSpeedMetersPerSecond - SpeedModifier);
-        turningSpeed = turningLimiter.calculate(turningSpeed)
-                * DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
 
         // 4. Construct desired chassis speeds
         ChassisSpeeds chassisSpeeds;
@@ -67,8 +59,10 @@ public class AutoTarget extends Command {
 @Override
       public boolean isFinished(){
 
-        return limelightSubsystem.getTx() > .5;
-
+        return limelightSubsystem.getClosestAprilTag() == -1
+||         Math.abs(limelightSubsystem.getTx()) <  0.7;
+                         
+            //if tx value > .5, stop. otherwise keep going   
 
 
         
