@@ -8,7 +8,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
     public static final class ModuleConstants {
-        public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
+        public static final double kWheelDiameterMeters = Units.inchesToMeters(4.0);
         public static final double kDriveMotorGearRatio = 1 / 6.75;
         public static final double kTurningMotorGearRatio = 1 / (150.0/7.0);
         public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters;
@@ -25,10 +25,6 @@ public final class Constants {
         public static final double kWheelBase = Units.inchesToMeters(20.25);
         // Distance between front and back wheels
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-                //new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-                //new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-                //new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
-                //new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
 
                 // was working
                 new Translation2d(kWheelBase / 2, kTrackWidth / 2),

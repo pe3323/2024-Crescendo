@@ -70,6 +70,7 @@ public class SwerveModule {
     }
 
     public double getDrivePosition() {
+        SmartDashboard.putNumber("Drive Position " + driveId, driveEncoder.getPosition());
         return driveEncoder.getPosition();
     }
 
