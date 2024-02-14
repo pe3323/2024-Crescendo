@@ -44,9 +44,9 @@ public class RobotContainer {
     public RobotContainer() {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 swerveSubsystem,
-                () -> -driverJoytick.getLeftX(),
-                () -> driverJoytick.getLeftY(),
-                () -> driverJoytick.getRightX(),
+                () -> driverJoytick.getLeftX(),
+                () -> -driverJoytick.getLeftY(),
+                () -> -driverJoytick.getRightX(),
                 () -> !driverJoytick.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
 
         configureButtonBindings();
