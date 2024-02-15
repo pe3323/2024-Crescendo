@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.util.List;
 
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -34,6 +35,8 @@ public class RobotContainer {
 
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
+
+
     private final XboxController driverJoytick = new XboxController(OIConstants.kDriverControllerPort);
         Trigger aButton = new JoystickButton(driverJoytick, XboxController.Button.kA.value);
         Trigger leftBumper = new JoystickButton(driverJoytick, XboxController.Button.kLeftBumper.value);
@@ -42,15 +45,26 @@ public class RobotContainer {
         Trigger yButton = new JoystickButton(driverJoytick, XboxController.Button.kY.value);
 
     public RobotContainer() {
+       
+       
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 swerveSubsystem,
                 () -> driverJoytick.getLeftX(),
                 () -> -driverJoytick.getLeftY(),
                 () -> -driverJoytick.getRightX(),
-                () -> !driverJoytick.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
+                () -> !driverJoytick.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)
+                ));
+
+        NamedCommands.registerCommand("autoAim", new AutoTarget(limelightSubsystem, swerveSubsystem));
+        
 
         configureButtonBindings();
+
+        
     }
+
+    
+    
 
     private void configureButtonBindings() {  
         aButton.onTrue( new Command() {
@@ -93,6 +107,6 @@ public class RobotContainer {
 
 
     public Command getAutonomousCommand() {
-       return new PathPlannerAuto("Test");
+       return new PathPlannerAuto("Auto1");
     }
 }

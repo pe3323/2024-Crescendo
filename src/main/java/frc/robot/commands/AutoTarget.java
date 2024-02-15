@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -34,7 +35,10 @@ public class AutoTarget extends Command {
   
         double xSpeed = 0.0;
         double ySpeed = 0.0;;
-        double turningSpeed = limelightSubsystem.getTx() > 0? .5 : -.5;
+        double turningSpeed = limelightSubsystem.getTx() > 0? -.5 : .5;
+
+        //PIDController turnController = new PIDController(xSpeed, ySpeed, turningSpeed);
+        //turnController.calculate(ySpeed, turningSpeed)
         if (isFinished()) {
     return;
 }
