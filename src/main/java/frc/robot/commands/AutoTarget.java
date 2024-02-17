@@ -34,12 +34,24 @@ public class AutoTarget extends Command {
       public void execute(){
   
         double xSpeed = 0.0;
-        double ySpeed = 0.0;;
-        double turningSpeed = limelightSubsystem.getTx() > 0? -.5 : .5;
+        double ySpeed = 0.0;
+        double percentError = Math.abs(limelightSubsystem.getTx()/27.0);
+        double turningSpeed = 0;
+        if (percentError >= 0.5) {
+          turningSpeed = limelightSubsystem.getTx() > 0? -1.0 : 1.0;
+        }
+        else if (percentError >= 0.15){
+          turningSpeed = limelightSubsystem.getTx() > 0? -.5 : .5;
+        }
+        else if (percentError >= 0.05){
+          turningSpeed = limelightSubsystem.getTx() > 0? -.30 : .30;
+        }
 
+        SmartDashboard.putNumber("AutoTarget Turn Speed", turningSpeed);
         //PIDController turnController = new PIDController(xSpeed, ySpeed, turningSpeed);
-        //turnController.calculate(ySpeed, turningSpeed)
+        //turnController.calculate(swerveSubsystem.getHeading(), swerveSubsystem.getHeading() + limelightSubsystem.getTx());
         if (isFinished()) {
+            SmartDashboard.putBoolean("AutoTarget Finished", true);
     return;
 }
 
@@ -64,11 +76,11 @@ public class AutoTarget extends Command {
       public boolean isFinished(){
 
         return limelightSubsystem.getClosestAprilTag() == -1
-||         Math.abs(limelightSubsystem.getTx()) <  0.7;
+||         Math.abs(limelightSubsystem.getTx()/27.0) <  0.02;
                          
             //if tx value > .5, stop. otherwise keep going   
 
-
+          // Math.abs(limelightSubsystem.getTx()) <  0.7;
         
       }
 
