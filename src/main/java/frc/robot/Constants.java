@@ -118,5 +118,8 @@ public final class Constants {
         public static final int intake = 123457;
         public static final int shooter = 123457;
 }
+    public static final class PivotConstants {
+        public static final int pivotID = 123456;
+    }
 
 }

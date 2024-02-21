@@ -26,13 +26,17 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoTarget;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterPivot;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class RobotContainer {
 
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
     private final Limelight limelightSubsystem = new Limelight();
-
+    private final Shooter shooterSubsystem = new Shooter();
+    private final ShooterPivot shooterPivotSubsystem = new ShooterPivot();
+    
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
 
@@ -56,7 +60,7 @@ public class RobotContainer {
                 () -> !driverJoytick.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)
                 ));
 
-        NamedCommands.registerCommand("autoAim", new AutoTarget(limelightSubsystem, swerveSubsystem));
+        NamedCommands.registerCommand("autoAim", new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem));
         
 
         configureButtonBindings();
@@ -75,7 +79,7 @@ public class RobotContainer {
                 }
         } );
 
-        yButton.onTrue( new AutoTarget(limelightSubsystem, swerveSubsystem) );
+        yButton.onTrue( new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem) );
 
         leftBumper.onTrue( new Command() {
                 @Override
@@ -105,17 +109,20 @@ public class RobotContainer {
                 public boolean isFinished() {return true;}
         } );
 
-        bButton.onTrue( new Command() {
+                bButton.onTrue( new Command() {
                 @Override
-                public void execute() {
-                        swerveSubsystem.zeroHeading();
+                public void initialize() {
+                        shooterSubsystem.setSpeed(0.7);
+
                 }
-                public boolean isFinished() {return true;}
+                public boolean isFinished() {
+                        shooterSubsystem.stop();
+                        return true;}
         } );
 }
 
 
     public Command getAutonomousCommand() {
-       return new PathPlannerAuto("AutoTests");
+       return new PathPlannerAuto("Auto1");
     }
 }

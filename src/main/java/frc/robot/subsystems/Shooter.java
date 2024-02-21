@@ -14,7 +14,7 @@ import frc.robot.Constants.ShooterConstants;
 ;
 
 public class Shooter extends SubsystemBase {
-    private final CANSparkMax shooter;
+    private final CANSparkMax motor1, motor2;
     private static final SparkMaxAlternateEncoder.Type kAltEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
     private static final int kCPR = 8192;
     private RelativeEncoder m_alternateEncoder;
@@ -22,48 +22,33 @@ public class Shooter extends SubsystemBase {
     SparkMaxPIDController pid;
 
     public Shooter(){
-        shooter= new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
-      shooter.restoreFactoryDefaults(); 
-       shooter.getEncoder().setPosition(0);
+        motor1= new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
+        motor2= new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);
+        motor1.restoreFactoryDefaults(); 
+        motor1.getEncoder().setPosition(0);
+        motor2.restoreFactoryDefaults(); 
+        motor2.getEncoder().setPosition(0);
  
-}
-    public void raise(){ //raises the roof
-
-        shooter.set(.7);
-        System.out.println("Raising the arm"  +  shooter.getDeviceId());
-
     }
-                                                                                                                                                                                                                                                                                                //Calamari
-    public void lower(){ //lowers the roof
+    public void setSpeed(double speedInpercent){ //changes speed of motors
 
-      shooter.set(-.7);
+        motor1.set(speedInpercent);
+        motor2.set(speedInpercent);
+        SmartDashboard.putNumber("Motor1 Speed"  +  motor1.getDeviceId(), speedInpercent);
+        SmartDashboard.putNumber("Motor2 Speed"  +  motor2.getDeviceId(), speedInpercent);
 
     }
 
-    public void stop(){ //stops the roof    
-        shooter.set(0);
+    public void stop(){ //stops the motors  
+        motor1.set(0);
+        motor2.set(0);
 
       
 
     }
-
-    public void Station(){
-        while(shooter.getEncoder().getPosition()> 155){
-            shooter.set(-.6);
-        }
-         
-        shooter.set(0);
-       
-        while (shooter.getEncoder().getPosition()< 152) {
-            shooter.set(.6);
-        }
-        
-        shooter.set(0);
-     }
-
     
 
-    public double getposition() { //sets position
-        return shooter.getEncoder().getPosition(); 
+    public double getposition() { //Gets position
+        return motor1.getEncoder().getPosition(); 
     }
 }
