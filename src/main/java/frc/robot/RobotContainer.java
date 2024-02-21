@@ -116,6 +116,6 @@ public class RobotContainer {
 
 
     public Command getAutonomousCommand() {
-       return new PathPlannerAuto("Auto1");
+       return new PathPlannerAuto("AutoTests");
     }
 }

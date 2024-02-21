@@ -7,6 +7,7 @@ import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,14 +20,22 @@ public class Intake extends SubsystemBase {
     private static final int kCPR = 8192;
     private RelativeEncoder m_alternateEncoder;
     private double armSpeed = 0.5;
+    private AnalogInput sensor;
     SparkMaxPIDController pid;
 
     public Intake(){
         intake= new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
        intake.restoreFactoryDefaults(); 
        intake.getEncoder().setPosition(0);
- 
-}
+     sensor = new AnalogInput(5);
+    }
+    public boolean HasNote(){
+return sensor.getValue() > 0;
+
+
+    }
+    
+    
     public void raise(){ //raises the roof
 
         intake.set(.7);
@@ -65,5 +74,6 @@ public class Intake extends SubsystemBase {
 
     public double getposition() { //sets position
         return intake.getEncoder().getPosition(); 
-    }
+    } 
+    
 }
