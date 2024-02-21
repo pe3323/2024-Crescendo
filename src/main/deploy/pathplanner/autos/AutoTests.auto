@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6619978954243629,
+      "y": 6.538118219093581
+    },
+    "rotation": -122.10625595511783
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Top Note Path"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Top Note To Middle Note"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle To Bottom"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

@@ -43,6 +43,7 @@ public class RobotContainer {
         Trigger rightBumper = new JoystickButton(driverJoytick, XboxController.Button.kRightBumper.value);
         Trigger xButton = new JoystickButton(driverJoytick, XboxController.Button.kX.value);
         Trigger yButton = new JoystickButton(driverJoytick, XboxController.Button.kY.value);
+        Trigger bButton = new JoystickButton(driverJoytick, XboxController.Button.kB.value);
 
     public RobotContainer() {
        
@@ -103,10 +104,18 @@ public class RobotContainer {
                 }
                 public boolean isFinished() {return true;}
         } );
+
+        bButton.onTrue( new Command() {
+                @Override
+                public void execute() {
+                        swerveSubsystem.zeroHeading();
+                }
+                public boolean isFinished() {return true;}
+        } );
 }
 
 
     public Command getAutonomousCommand() {
-       return new PathPlannerAuto("Auto1");
+       return new PathPlannerAuto("AutoTests");
     }
 }
