@@ -26,6 +26,7 @@ public class Intake extends SubsystemBase {
     public Intake(){
         intake= new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
        intake.restoreFactoryDefaults(); 
+       intake.setInverted(true);
        intake.getEncoder().setPosition(0);
      sensor = new AnalogInput(5);
     }
@@ -38,7 +39,7 @@ return sensor.getValue() > 0;
     
     public void raise(){ //raises the roof
 
-        intake.set(.7);
+        intake.set(.20);
         System.out.println("Raising the arm"  +  intake.getDeviceId());
 
     }

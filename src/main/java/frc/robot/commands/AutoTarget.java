@@ -9,22 +9,25 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.ShooterPivot;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class AutoTarget extends Command {
     
     private final SwerveSubsystem swerveSubsystem;
     private final Limelight limelightSubsystem;
+    private final ShooterPivot shooterPivotSubsystem;
     private final SlewRateLimiter xLimiter, yLimiter, turningLimiter;
     public static double SpeedModifier = 0;
-        public AutoTarget(Limelight AprilTagSeen, SwerveSubsystem AprilTagID) 
+        public AutoTarget(Limelight AprilTagSeen, SwerveSubsystem AprilTagID, ShooterPivot shooterPivot) 
         {        
                 this.swerveSubsystem=AprilTagID;
                 this.limelightSubsystem=AprilTagSeen;
+                this.shooterPivotSubsystem=shooterPivot;
                 this.xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
                 this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
                 this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
-                addRequirements(swerveSubsystem, limelightSubsystem);
+                addRequirements(swerveSubsystem, limelightSubsystem, shooterPivot);
 
 
 
@@ -43,7 +46,7 @@ public class AutoTarget extends Command {
         else if (percentError >= 0.15){
           turningSpeed = limelightSubsystem.getTx() > 0? -.5 : .5;
         }
-        else if (percentError >= 0.05){
+        else if (percentError >= 0.02){
           turningSpeed = limelightSubsystem.getTx() > 0? -.30 : .30;
         }
 

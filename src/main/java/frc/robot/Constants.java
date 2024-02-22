@@ -98,6 +98,7 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
+        public static final int kShooterControllerPort = 1;
 
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
@@ -115,8 +116,9 @@ public final class Constants {
 
     public static final class ShooterConstants {
         
-        public static final int intake = 123457;
-        public static final int shooter = 123457;
+        public static final int intake = 11;
+        public static final int shooter1 = 9;
+        public static final int shooter2 = 10;
 }
     public static final class PivotConstants {
         public static final int pivotID = 123456;

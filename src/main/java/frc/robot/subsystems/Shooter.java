@@ -22,10 +22,11 @@ public class Shooter extends SubsystemBase {
     SparkMaxPIDController pid;
 
     public Shooter(){
-        motor1= new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
-        motor2= new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);
+        motor1= new CANSparkMax(ShooterConstants.shooter1, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
+        motor2= new CANSparkMax(ShooterConstants.shooter2, MotorType.kBrushless);
         motor1.restoreFactoryDefaults(); 
         motor1.getEncoder().setPosition(0);
+        motor1.setInverted (true);
         motor2.restoreFactoryDefaults(); 
         motor2.getEncoder().setPosition(0);
  
