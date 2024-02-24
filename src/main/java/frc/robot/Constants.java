@@ -124,4 +124,9 @@ public final class Constants {
         public static final int pivotID = 123456;
     }
 
+    public static final class ClimberConstants {
+        public static final int climberID1 = 13;
+        public static final int climberID2 = 14;
+    }
+
 }

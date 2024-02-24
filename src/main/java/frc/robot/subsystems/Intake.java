@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants.ShooterConstants;
-;
+import frc.robot.Constants.ShooterConstants;;
 
 public class Intake extends SubsystemBase {
     private final CANSparkMax intake;
@@ -23,58 +22,55 @@ public class Intake extends SubsystemBase {
     private AnalogInput sensor;
     SparkMaxPIDController pid;
 
-    public Intake(){
-        intake= new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); //makes new motor controller that is defined as the motor for the arm
-       intake.restoreFactoryDefaults(); 
-       intake.setInverted(true);
-       intake.getEncoder().setPosition(0);
-     sensor = new AnalogInput(5);
+    public Intake() {
+        intake = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); // makes new motor controller that is
+                                                                                 // defined as the motor for the arm
+        intake.restoreFactoryDefaults();
+        intake.setInverted(true);
+        intake.getEncoder().setPosition(0);
+        sensor = new AnalogInput(5);
     }
-    public boolean HasNote(){
-return sensor.getValue() > 0;
 
+    public boolean HasNote() {
+        return sensor.getValue() > 0;
 
     }
-    
-    
-    public void raise(){ //raises the roof
+
+    public void raise() { // raises the roof
 
         intake.set(.20);
-        System.out.println("Raising the arm"  +  intake.getDeviceId());
-
-    }
-                                                                                                                                                                                                                                                                                                //Calamari
-    public void lower(){ //lowers the roof
-
-      intake.set(-.7);
+        System.out.println("Raising the arm" + intake.getDeviceId());
 
     }
 
-    public void stop(){ //stops the roof    
+    // Calamari
+    public void lower() { // lowers the roof
+
+        intake.set(-.7);
+
+    }
+
+    public void stop() { // stops the roof
         intake.set(0);
 
-      
-
     }
 
-    public void Station(){
-        while(intake.getEncoder().getPosition()> 155){
+    public void Station() {
+        while (intake.getEncoder().getPosition() > 155) {
             intake.set(-.6);
         }
-         
+
         intake.set(0);
 
-        while (intake.getEncoder().getPosition()< 152) {
+        while (intake.getEncoder().getPosition() < 152) {
             intake.set(.6);
         }
-        
+
         intake.set(0);
-     }
+    }
 
-    
+    public double getposition() { // sets position
+        return intake.getEncoder().getPosition();
+    }
 
-    public double getposition() { //sets position
-        return intake.getEncoder().getPosition(); 
-    } 
-    
 }
