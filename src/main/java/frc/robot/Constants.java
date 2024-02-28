@@ -116,12 +116,14 @@ public final class Constants {
 
     public static final class ShooterConstants {
         
+        public static final double rotPerDegree = 1.323;
+        public static final double goalHeight = 82.0;//inches
         public static final int intake = 11;
         public static final int shooter1 = 9;
         public static final int shooter2 = 10;
 }
     public static final class PivotConstants {
-        public static final int pivotID = 123456;
+        public static final int pivotID = 12;
     }
 
     public static final class ClimberConstants {

@@ -5,19 +5,29 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.subsystems.ShooterPivot;
+
 
 /** An example command that uses an example subsystem. */
 public class AutoAim extends CommandBase {
 
+private final Limelight limelightSubsystem;
+private final ShooterPivot shooter;
+  
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoAim() {
+  public AutoAim(Limelight limelightSubsystem, ShooterPivot shooter) {
+
+    this.limelightSubsystem = limelightSubsystem;
+    this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements();
+    addRequirements(limelightSubsystem, shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +36,13 @@ public class AutoAim extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+   double targetPosition= (Math.tanh(ShooterConstants.goalHeight/limelightSubsystem.getDistanceToTag(4)) - 40.81) * ShooterConstants.rotPerDegree;
+
+    shooter.setPosition(targetPosition);
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override

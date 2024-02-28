@@ -44,6 +44,7 @@ public class RobotContainer {
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
     private final XboxController driverJoytick = new XboxController(OIConstants.kDriverControllerPort);
+    private final XboxController ShooterJoytick = new XboxController(OIConstants.kShooterControllerPort);
         Trigger aButton = new JoystickButton(driverJoytick, XboxController.Button.kA.value);
         Trigger leftBumper = new JoystickButton(driverJoytick, XboxController.Button.kLeftBumper.value);
         Trigger rightBumper = new JoystickButton(driverJoytick, XboxController.Button.kRightBumper.value);
@@ -81,7 +82,8 @@ public class RobotContainer {
         aButton.onTrue( new Command() {
                 @Override
                 public void execute() {
-                        swerveSubsystem.resetAllEncoders();  
+                        swerveSubsystem.resetAllEncoders(); 
+                        swerveSubsystem.zeroHeading(); 
                 }
         } );
 
@@ -107,10 +109,10 @@ public class RobotContainer {
                 public boolean isFinished() {return true;}
         } );
 
-                xButton.onTrue( new Command() {
-                @Override
-                public void execute() {
-                        limelightSubsystem.getValues();
+        xButton.onTrue( new Command() {
+         @Override
+         public void execute() {
+                limelightSubsystem.getValues();
                 }
                 public boolean isFinished() {return true;}
         } );

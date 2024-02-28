@@ -28,7 +28,7 @@ public class Intake extends SubsystemBase {
         intake.restoreFactoryDefaults();
         intake.setInverted(true);
         intake.getEncoder().setPosition(0);
-        sensor = new AnalogInput(5);
+        sensor = new AnalogInput(4);
     }
 
     public boolean HasNote() {
@@ -39,6 +39,7 @@ public class Intake extends SubsystemBase {
     public void raise() { // raises the roof
 
         intake.set(.20);
+        SmartDashboard.putNumber("Sensor Value", sensor.getValue());
         System.out.println("Raising the arm" + intake.getDeviceId());
 
     }
