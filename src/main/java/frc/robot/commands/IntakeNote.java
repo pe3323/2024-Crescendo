@@ -19,7 +19,14 @@ public class IntakeNote extends Command {
     }
 
     @Override
+    public void end(boolean x) {
+        //intakeSubsystem.lower();
+       
+        intakeSubsystem.stop();
+    }
+
+    @Override
     public boolean isFinished(){
-        return intakeSubsystem.HasNote();
+        return false; //intakeSubsystem.HasNote();
     }
 }

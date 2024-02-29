@@ -26,6 +26,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoTarget;
+import frc.robot.commands.IntakeNote;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -85,6 +86,8 @@ public class RobotContainer {
                         swerveSubsystem.resetAllEncoders(); 
                         swerveSubsystem.zeroHeading(); 
                 }
+
+                public boolean isFinished() {return true;}
         } );
 
         yButton.onTrue( new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem) );
@@ -131,21 +134,7 @@ public class RobotContainer {
                         return false; }
         } );
 
-        xShooterButton.whileTrue( new Command() {
-                @Override
-                public void execute(){
-                        intakeSubsystem.raise();
-                }
-
-                @Override
-                public void end(boolean x) {
-                        intakeSubsystem.stop();
-                }
-
-                public boolean isFinished() {
-                        //intakeSubsystem.stop();
-                        return false;}
-        } );
+        xShooterButton.onTrue( new IntakeNote(intakeSubsystem) );
 }
 
 

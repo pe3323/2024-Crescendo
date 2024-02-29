@@ -5,6 +5,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -20,7 +21,7 @@ public class Intake extends SubsystemBase {
     private RelativeEncoder m_alternateEncoder;
     private double armSpeed = 0.5;
     private AnalogInput sensor;
-    SparkMaxPIDController pid;
+    SparkPIDController pidController;
 
     public Intake() {
         intake = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); // makes new motor controller that is
@@ -28,18 +29,27 @@ public class Intake extends SubsystemBase {
         intake.restoreFactoryDefaults();
         intake.setInverted(true);
         intake.getEncoder().setPosition(0);
+
+        pidController = intake.getPIDController();
+        pidController.setP(0.1);
+        pidController.setI(0.0);
+        pidController.setD(0.0);
+        pidController.setIZone(0);
+        pidController.setFF(0);
+        pidController.setOutputRange(-1, 1);
+
         sensor = new AnalogInput(4);
     }
 
     public boolean HasNote() {
-        return sensor.getValue() > 0;
+        return sensor.getVoltage() > 2;
 
     }
 
     public void raise() { // raises the roof
 
         intake.set(.20);
-        SmartDashboard.putNumber("Sensor Value", sensor.getValue());
+        SmartDashboard.putNumber("Sensor Value", sensor.getVoltage());
         System.out.println("Raising the arm" + intake.getDeviceId());
 
     }
@@ -47,7 +57,8 @@ public class Intake extends SubsystemBase {
     // Calamari
     public void lower() { // lowers the roof
 
-        intake.set(-.7);
+        intake.set(-.1);
+        
 
     }
 
