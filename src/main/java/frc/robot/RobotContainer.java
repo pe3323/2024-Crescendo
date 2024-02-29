@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoTarget;
@@ -32,6 +33,7 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterPivot;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 
 public class RobotContainer {
@@ -41,7 +43,9 @@ public class RobotContainer {
     private final Shooter shooterSubsystem = new Shooter();
     private final ShooterPivot shooterPivotSubsystem = new ShooterPivot();
     private final Intake intakeSubsystem = new Intake();
-    
+    private final Climber leftClimber = new Climber(ClimberConstants.climberID1);
+    private final Climber rightClimber = new Climber(ClimberConstants.climberID2);
+
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
     private final XboxController driverJoytick = new XboxController(OIConstants.kDriverControllerPort);
@@ -56,6 +60,8 @@ public class RobotContainer {
     private final XboxController shooterJoytick = new XboxController(OIConstants.kShooterControllerPort);   
         Trigger bShooterButton = new JoystickButton(shooterJoytick, XboxController.Button.kB.value);
         Trigger xShooterButton = new JoystickButton(shooterJoytick, XboxController.Button.kX.value);
+        Trigger opLeftBumper = new JoystickButton(shooterJoytick, XboxController.Button.kLeftBumper.value);
+        Trigger opRightBumper = new JoystickButton(shooterJoytick, XboxController.Button.kRightBumper.value);
 
     public RobotContainer() {
        
@@ -135,6 +141,35 @@ public class RobotContainer {
         } );
 
         xShooterButton.onTrue( new IntakeNote(intakeSubsystem) );
+
+        opLeftBumper.whileTrue( new Command() {
+                public void execute() {
+                        rightClimber.raise();
+                        leftClimber.raise();
+
+                }
+
+                public void end( boolean x ){
+                        rightClimber.stop();
+                        leftClimber.stop();
+                }
+                public boolean isFinished() { return false; }
+        });
+
+
+                opRightBumper.whileTrue( new Command() {
+                public void execute() {
+                        rightClimber.lower();
+                        leftClimber.lower();
+
+                }
+
+                public void end( boolean x ){
+                        rightClimber.stop();
+                        leftClimber.stop();
+                }
+                public boolean isFinished() { return false; }
+        });
 }
 
 
