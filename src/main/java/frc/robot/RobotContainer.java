@@ -1,5 +1,6 @@
 package frc.robot;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import com.pathplanner.lib.auto.NamedCommands;
@@ -15,6 +16,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -31,6 +33,7 @@ import frc.robot.commands.IntakeNote;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.NeoClimber;
+import frc.robot.subsystems.NeoShooter;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterPivot;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -42,7 +45,7 @@ public class RobotContainer {
 
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
         private final Limelight limelightSubsystem = new Limelight();
-        private final Shooter shooterSubsystem = new KrakenShooter();
+        private final Shooter shooterSubsystem = new NeoShooter();
         private final ShooterPivot shooterPivotSubsystem = new ShooterPivot();
         private final Intake intakeSubsystem = new Intake();
         private final Climber leftClimber = new NeoClimber(ClimberConstants.climberID1);
@@ -66,6 +69,10 @@ public class RobotContainer {
         public Trigger leftTrigger = shooterJoytick.leftTrigger();
         public Trigger rightTrigger = shooterJoytick.rightTrigger();
 
+        SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+        
+        
         public RobotContainer() {
 
                 swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
@@ -80,6 +87,9 @@ public class RobotContainer {
 
                 configureButtonBindings();
 
+                // Add commands to the autonomous command chooser
+                m_chooser.setDefaultOption("Left Only", new PathPlannerAuto("Auto1"));
+                m_chooser.addOption("3 Note From Left", new PathPlannerAuto("AutoTests"));
         }
 
         private void configureButtonBindings() {
@@ -137,13 +147,19 @@ public class RobotContainer {
                 bShooterButton.whileTrue(new Command() {
                         @Override
                         public void execute() {
-                                shooterSubsystem.setSpeed(0.8);
+                        
+                                shooterSubsystem.setSpeed(0.9);
+                                
 
+                                if (shooterSubsystem.getRPM() > 5200) { 
+                                        intakeSubsystem.raise();
+                                }                        
                         }
 
                         @Override
                         public void end(boolean x) {
                                 shooterSubsystem.stop();
+                                intakeSubsystem.stop();
                         }
 
                         public boolean isFinished() {
@@ -220,10 +236,9 @@ public class RobotContainer {
                                 return false;
                         }
                 }); 
-
+                
         }
-
         public Command getAutonomousCommand() {
-                return new PathPlannerAuto("Auto1");
-        }
+                return m_chooser.getSelected();
+              }
 }

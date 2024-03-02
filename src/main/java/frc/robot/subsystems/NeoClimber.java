@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 
@@ -18,6 +19,8 @@ public class NeoClimber extends SubsystemBase implements Climber {
   public NeoClimber(int CANId) {
       motor1 = new CANSparkMax(CANId, CANSparkLowLevel.MotorType.kBrushless); // makes new motor controller that is
       motor1.restoreFactoryDefaults();
+      motor1.enableSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, true);
+      motor1.setSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, 0);
       
   }
   

@@ -6,13 +6,14 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Limelight;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterPivot;
 
 
 /** An example command that uses an example subsystem. */
-public class AutoAim extends CommandBase {
+public class AutoAim extends Command {
 
 private final Limelight limelightSubsystem;
 private final ShooterPivot shooter;

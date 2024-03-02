@@ -19,6 +19,7 @@ public interface Shooter {
 
     public void stop();
     
+    public double getRPM();
 
     public double getposition();
 }

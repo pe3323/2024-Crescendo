@@ -27,6 +27,6 @@ public class IntakeNote extends Command {
 
     @Override
     public boolean isFinished(){
-        return false; //intakeSubsystem.HasNote();
+    return intakeSubsystem.HasNote();
     }
 }

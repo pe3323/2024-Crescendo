@@ -27,7 +27,6 @@ public class KrakenShooter extends SubsystemBase implements Shooter {
         motor2= new TalonFX(ShooterConstants.shooter2);
         motor1.getConfigurator().apply(new TalonFXConfiguration());
         motor1.getConfigurator().setPosition(0);
-        motor1.setInverted (true);
         motor2.getConfigurator().apply(new TalonFXConfiguration());
         motor2.getConfigurator().setPosition(0);
  
@@ -52,5 +51,10 @@ public class KrakenShooter extends SubsystemBase implements Shooter {
 
     public double getposition() { //Gets position
         return motor1.getPosition().getValueAsDouble()  ; 
+    }
+    @Override
+    public double getRPM() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRPM'");
     }
 }

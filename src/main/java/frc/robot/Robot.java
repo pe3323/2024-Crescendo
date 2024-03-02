@@ -6,6 +6,8 @@ package frc.robot;
 
 import org.photonvision.PhotonCamera;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,6 +21,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  
 
   final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(24);
   final double TARGET_HEIGHT_METERS = Units.feetToMeters(5);
@@ -54,6 +58,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    CameraServer.startAutomaticCapture();
+    CvSink outputStream = CameraServer.getVideo();
+    
   }
 
   /**

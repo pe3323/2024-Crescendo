@@ -1,14 +1,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxAlternateEncoder;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -16,11 +12,7 @@ import frc.robot.Constants.ShooterConstants;;
 
 public class Intake extends SubsystemBase {
     private final CANSparkMax intake;
-    private static final SparkMaxAlternateEncoder.Type kAltEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
-    private static final int kCPR = 8192;
-    private RelativeEncoder m_alternateEncoder;
-    private double armSpeed = 0.5;
-    private AnalogInput sensor;
+    private DigitalInput sensor;
     SparkPIDController pidController;
 
     public Intake() {
@@ -38,19 +30,19 @@ public class Intake extends SubsystemBase {
         pidController.setFF(0);
         pidController.setOutputRange(-1, 1);
 
-        sensor = new AnalogInput(4);
+        sensor = new DigitalInput(0);
     }
 
     public boolean HasNote() {
-        return sensor.getVoltage() > 2;
+        return !sensor.get();
 
     }
 
     public void raise() { // raises the roof
 
         intake.set(.20);
-        SmartDashboard.putNumber("Sensor Value", sensor.getVoltage());
-        System.out.println("Raising the arm" + intake.getDeviceId());
+        SmartDashboard.putBoolean("Sensor Value", sensor.get());
+        
 
     }
 
