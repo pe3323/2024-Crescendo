@@ -109,15 +109,15 @@ public final class Constants {
     }
 
     public static final class VisionConstants {
-        public static final double cameraHeight = 11.75; //Inches
+        public static final double cameraHeight = 27; //Inches
         public static final double apriltagHeight = 54.0; //Inches
         public static final double cameraAngle = 22.5; //Degrees
     }
 
     public static final class ShooterConstants {
         
-        public static final double rotPerDegree = 1.323;
-        public static final double goalHeight = 82.0;//inches
+        public static final double degreePerRot = 2.2;
+        public static final double goalHeight = 77.0;//inches
         public static final int intake = 11;
         public static final int shooter1 = 9;
         public static final int shooter2 = 10;

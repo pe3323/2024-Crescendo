@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Limelight;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants;
@@ -39,10 +40,25 @@ private final ShooterPivot shooter;
   @Override
   public void execute() {
 
-   double targetPosition= (Math.tanh(ShooterConstants.goalHeight/limelightSubsystem.getDistanceToTag(4)) - 40.81) * ShooterConstants.rotPerDegree;
+  double targetRadians = Math.atan(ShooterConstants.goalHeight/(limelightSubsystem.getDistanceToTag(4) - 9 ));
+
+  double targetAngle = targetRadians * (180/Math.PI);
+  SmartDashboard.putNumber("target angle", targetAngle);
+
+  if (targetAngle<65 && targetAngle>47){
+
+   double targetPosition= ( targetAngle - 47) / ShooterConstants.degreePerRot;
 
     shooter.setPosition(targetPosition);
+    SmartDashboard.putNumber("targetPosition", targetPosition);
 
+  }
+
+  else if (targetAngle<= 47){
+
+    shooter.setPosition(0.0);
+
+  }
   }
 
   // Called once the command ends or is interrupted.

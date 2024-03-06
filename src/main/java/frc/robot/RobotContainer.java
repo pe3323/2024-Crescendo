@@ -28,6 +28,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoAim;
 import frc.robot.commands.AutoTarget;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.SwerveJoystickCmd;
@@ -64,6 +65,8 @@ public class RobotContainer {
         private final CommandXboxController shooterJoytick = new CommandXboxController(OIConstants.kShooterControllerPort);
         public Trigger bShooterButton = shooterJoytick.b();
         public Trigger xShooterButton = shooterJoytick.x();
+        public Trigger yShooterButton = shooterJoytick.y();
+        public Trigger aShooterButton = shooterJoytick.a();
         public Trigger opLeftBumper = shooterJoytick.leftBumper();
         public Trigger opRightBumper = shooterJoytick.rightBumper();
         public Trigger leftTrigger = shooterJoytick.leftTrigger();
@@ -168,6 +171,19 @@ public class RobotContainer {
                 });
 
                 xShooterButton.onTrue(new IntakeNote(intakeSubsystem));
+
+                yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem));
+
+                aShooterButton.onTrue(new Command() {
+                        @Override
+                        public void execute() {
+                                shooterPivotSubsystem.setPosition(5);
+                        }
+
+                        public boolean isFinished() {
+                                return true;
+                        }
+                });
 
                 opLeftBumper.whileTrue(new Command() {
                         public void execute() {
