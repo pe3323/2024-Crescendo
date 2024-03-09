@@ -41,6 +41,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.KrakenShooter;
+import frc.robot.subsystems.Lighting;
 
 public class RobotContainer {
 
@@ -51,6 +52,7 @@ public class RobotContainer {
         private final Intake intakeSubsystem = new Intake();
         private final Climber leftClimber = new NeoClimber(ClimberConstants.climberID1);
         private final Climber rightClimber = new NeoClimber(ClimberConstants.climberID2);
+        private final Lighting lightingSubsystem = new Lighting(0);
 
         // private final Joystick driverJoytick = new
         // Joystick(OIConstants.kDriverControllerPort);
@@ -172,7 +174,7 @@ public class RobotContainer {
 
                 xShooterButton.onTrue(new IntakeNote(intakeSubsystem));
 
-                yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem));
+                yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem));
 
                 aShooterButton.onTrue(new Command() {
                         @Override

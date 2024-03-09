@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,18 +19,20 @@ public class AutoAim extends Command {
 
 private final Limelight limelightSubsystem;
 private final ShooterPivot shooter;
+private final Lighting lighting;
   
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoAim(Limelight limelightSubsystem, ShooterPivot shooter) {
+  public AutoAim(Limelight limelightSubsystem, ShooterPivot shooter, Lighting lighting) {
 
     this.limelightSubsystem = limelightSubsystem;
     this.shooter = shooter;
+    this.lighting = lighting;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(limelightSubsystem, shooter);
+    addRequirements(limelightSubsystem, shooter, lighting);
   }
 
   // Called when the command is initially scheduled.
@@ -52,6 +55,7 @@ private final ShooterPivot shooter;
     shooter.setPosition(targetPosition);
     SmartDashboard.putNumber("targetPosition", targetPosition);
 
+    lighting.setSolidColor(250, 163, 42);
   }
 
   else if (targetAngle<= 47){
@@ -63,11 +67,14 @@ private final ShooterPivot shooter;
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    lighting.setSolidColor (160,0,255);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return true;
+
   }
 }
