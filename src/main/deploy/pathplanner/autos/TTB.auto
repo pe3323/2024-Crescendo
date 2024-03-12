@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6619978954243629,
+      "y": 6.538118219093581
+    },
+    "rotation": -120.14138555207536
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Top Note Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Top to Bottom"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Bottom Shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

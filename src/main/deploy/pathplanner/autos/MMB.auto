@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.1897383794837892,
+      "y": 5.570593998331267
+    },
+    "rotation": -179.9999999999575
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle Note Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle To Bottom"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Bottom Shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

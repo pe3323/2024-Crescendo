@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6619978954247765,
+      "y": 4.515113030219223
+    },
+    "rotation": 117.51200262364985
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Bottom Note Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Bottom Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BShoot to Five"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Five-Shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

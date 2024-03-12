@@ -31,6 +31,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoAim;
 import frc.robot.commands.AutoTarget;
 import frc.robot.commands.IntakeNote;
+import frc.robot.commands.Shoot;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.NeoClimber;
@@ -85,9 +86,13 @@ public class RobotContainer {
                                 () -> -driverJoytick.getRightX(),
                                 () -> true));
 
-                NamedCommands.registerCommand("autoAim",
+                NamedCommands.registerCommand("autoTarget              ",
                                 new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem));
+                
+                NamedCommands.registerCommand("shoot",
+                                new Shoot(intakeSubsystem, shooterSubsystem));
 
+                                
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser
@@ -108,7 +113,7 @@ public class RobotContainer {
                         }
                 });
 
-                yButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem));
+                yButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem)));
 
                 leftBumper.onTrue(new Command() {
                         @Override
@@ -147,32 +152,12 @@ public class RobotContainer {
                         }
                 });
 
-                bShooterButton.whileTrue(new Command() {
-                        @Override
-                        public void execute() {
-                        
-                                shooterSubsystem.setSpeed(0.9);
-                                
-
-                                if (shooterSubsystem.getRPM() > 5200) { 
-                                        intakeSubsystem.raise();
-                                }                        
-                        }
-
-                        @Override
-                        public void end(boolean x) {
-                                shooterSubsystem.stop();
-                                intakeSubsystem.stop();
-                        }
-
-                        public boolean isFinished() {
-                                return false;
-                        }
-                });
+                bShooterButton.whileTrue(new Shoot(intakeSubsystem, shooterSubsystem) 
+                );
 
                 xShooterButton.onTrue(new IntakeNote(intakeSubsystem));
 
-                yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem));
+                //yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem));
 
                 aShooterButton.onTrue(new Command() {
                         @Override

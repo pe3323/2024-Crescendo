@@ -1,0 +1,55 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6619978954243629,
+      "y": 6.538118219093581
+    },
+    "rotation": -121.26373169437743
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Top Note Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Top-One"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "One-Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shoot-Two"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Two-Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shoot-Three"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
