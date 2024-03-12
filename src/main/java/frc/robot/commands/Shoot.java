@@ -5,24 +5,28 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class Shoot extends CommandBase {
   private final Intake intake;
   private final Shooter shooter;
+  private final Lighting lighting;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Shoot( Intake intake, Shooter shooter)
+  public Shoot( Intake intake, Shooter shooter, Lighting lighting)
    { this.shooter = shooter;
     this.intake = intake;
+    this.lighting = lighting;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake, shooter);
+    addRequirements(intake, shooter, lighting);
   
   }
 
@@ -32,8 +36,9 @@ public class Shoot extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() { shooter.setSpeed(0.9);
-                                
+  public void execute() {
+     shooter.setSpeed(0.9);
+     lighting.setSolidColor(160,0,255);               
 
     if (shooter.getRPM() > 5200) { 
             intake.raise();
@@ -43,7 +48,15 @@ public class Shoot extends CommandBase {
   @Override
   public void end(boolean interrupted) 
   { shooter.stop();
-    intake.stop();}
+    intake.stop();
+  var alliance = DriverStation.getAlliance();
+                                if (alliance.get() == DriverStation.Alliance.Red){
+                                  lighting.setSolidColor (227, 5, 5);
+                                }
+                                else{
+                                  lighting.setSolidColor (62, 62, 255);
+    }
+  }
 
   // Returns true when the command should end.
   @Override

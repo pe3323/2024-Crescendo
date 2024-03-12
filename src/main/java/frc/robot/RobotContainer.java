@@ -93,7 +93,7 @@ public class RobotContainer {
                                 new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem));
                 
                 NamedCommands.registerCommand("shoot",
-                                new Shoot(intakeSubsystem, shooterSubsystem));
+                                new Shoot(intakeSubsystem, shooterSubsystem, lightingSubsystem));
 
                                 
                 configureButtonBindings();
@@ -167,7 +167,7 @@ public class RobotContainer {
                         }
                 });
 
-                bShooterButton.whileTrue(new Shoot(intakeSubsystem, shooterSubsystem) 
+                bShooterButton.whileTrue(new Shoot(intakeSubsystem, shooterSubsystem, lightingSubsystem) 
                 );
 
                 xShooterButton.onTrue(new IntakeNote(intakeSubsystem, lightingSubsystem));

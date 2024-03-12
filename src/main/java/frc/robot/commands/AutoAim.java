@@ -55,7 +55,7 @@ private final Lighting lighting;
     shooter.setPosition(targetPosition);
     SmartDashboard.putNumber("targetPosition", targetPosition);
 
-    lighting.setSolidColor(250, 163, 42);
+    lighting.setSolidColor(247, 191, 235);
   }
 
   else if (targetAngle<= 47){
