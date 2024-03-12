@@ -117,7 +117,7 @@ public class RobotContainer {
                         }
                 });
 
-                yButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem)));
+                yButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)));
 
                 leftBumper.onTrue(new Command() {
                         @Override
@@ -156,49 +156,12 @@ public class RobotContainer {
                         }
                 });
 
-<<<<<<< Updated upstream
                 bShooterButton.whileTrue(new Shoot(intakeSubsystem, shooterSubsystem) 
                 );
-=======
-                bShooterButton.whileTrue(new Command() {
-                        @Override
-                        public void execute() {
-                        
-                                shooterSubsystem.setSpeed(0.9);
-                                lightingSubsystem.setSolidColor(160,0,255);
-
-                                if (shooterSubsystem.getRPM() > 5200) { 
-                                        intakeSubsystem.raise();
-                                }                        
-                        }
-
-                        @Override
-                        public void end(boolean x) {
-                                shooterSubsystem.stop();
-                                intakeSubsystem.stop();
-                                
-                                var alliance = DriverStation.getAlliance();
-                                if (alliance.get() == DriverStation.Alliance.Red){
-                                  lightingSubsystem.setSolidColor (227, 5, 5);
-                                }
-                                else{
-                                  lightingSubsystem.setSolidColor (62, 62, 255);
-    }
-                        }
-
-                        public boolean isFinished() {
-                                return false;
-                        }
-                });
->>>>>>> Stashed changes
 
                 xShooterButton.onTrue(new IntakeNote(intakeSubsystem, lightingSubsystem));
 
-<<<<<<< HEAD
                 //yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem));
-=======
-                yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem));
->>>>>>> 270fd720d517d3db153b6cadbdda6add37d9fb63
 
                 aShooterButton.onTrue(new Command() {
                         @Override
