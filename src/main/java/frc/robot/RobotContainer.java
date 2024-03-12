@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -103,6 +104,7 @@ public class RobotContainer {
         }
 
         private void configureButtonBindings() {
+                
                 aButton.onTrue(new Command() {
                         @Override
                         public void execute() {
@@ -154,10 +156,43 @@ public class RobotContainer {
                         }
                 });
 
+<<<<<<< Updated upstream
                 bShooterButton.whileTrue(new Shoot(intakeSubsystem, shooterSubsystem) 
                 );
+=======
+                bShooterButton.whileTrue(new Command() {
+                        @Override
+                        public void execute() {
+                        
+                                shooterSubsystem.setSpeed(0.9);
+                                lightingSubsystem.setSolidColor(160,0,255);
 
-                xShooterButton.onTrue(new IntakeNote(intakeSubsystem));
+                                if (shooterSubsystem.getRPM() > 5200) { 
+                                        intakeSubsystem.raise();
+                                }                        
+                        }
+
+                        @Override
+                        public void end(boolean x) {
+                                shooterSubsystem.stop();
+                                intakeSubsystem.stop();
+                                
+                                var alliance = DriverStation.getAlliance();
+                                if (alliance.get() == DriverStation.Alliance.Red){
+                                  lightingSubsystem.setSolidColor (227, 5, 5);
+                                }
+                                else{
+                                  lightingSubsystem.setSolidColor (62, 62, 255);
+    }
+                        }
+
+                        public boolean isFinished() {
+                                return false;
+                        }
+                });
+>>>>>>> Stashed changes
+
+                xShooterButton.onTrue(new IntakeNote(intakeSubsystem, lightingSubsystem));
 
 <<<<<<< HEAD
                 //yShooterButton.onTrue(new AutoAim(limelightSubsystem, shooterPivotSubsystem));

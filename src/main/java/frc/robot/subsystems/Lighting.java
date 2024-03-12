@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Lighting extends SubsystemBase{
@@ -25,7 +27,14 @@ public class Lighting extends SubsystemBase{
     m_led.start();
     
     // Set default color to purple
-    setSolidColor (160, 0, 255);
+    var alliance = DriverStation.getAlliance();
+    if (alliance.get() == DriverStation.Alliance.Red){
+        setSolidColor (227, 5, 5);
+    }
+    else{
+        setSolidColor (62, 62, 255);
+    }
+
 
 
     }
