@@ -30,6 +30,7 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoAim;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTarget;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.Shoot;
@@ -89,13 +90,16 @@ public class RobotContainer {
                                 () -> -driverJoytick.getRightX(),
                                 () -> true));
 
-                NamedCommands.registerCommand("autoTarget              ",
+                NamedCommands.registerCommand("autoTarget",
                                 new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem));
                 
                 NamedCommands.registerCommand("shoot",
-                                new Shoot(intakeSubsystem, shooterSubsystem, lightingSubsystem));
+                                new AutoShoot(intakeSubsystem, shooterSubsystem));
 
-                                
+                NamedCommands.registerCommand("intake",
+                                new IntakeNote(intakeSubsystem, lightingSubsystem));   
+                NamedCommands.registerCommand("aim",
+                                new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem));             
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser
@@ -107,10 +111,19 @@ public class RobotContainer {
                 m_chooser.addOption("MM", new PathPlannerAuto("MM"));
                 m_chooser.addOption("TT1", new PathPlannerAuto("TT1"));
                 m_chooser.addOption("BB5", new PathPlannerAuto("BB5"));
+                m_chooser.addOption("BB4", new PathPlannerAuto("BB4"));
+                m_chooser.addOption("BB3", new PathPlannerAuto("BB3"));
                 m_chooser.addOption("TTM", new PathPlannerAuto("TTM"));
                 m_chooser.addOption("MMT", new PathPlannerAuto("MMT"));
                 m_chooser.addOption("MMB", new PathPlannerAuto("MMB"));
                 m_chooser.addOption("BBM", new PathPlannerAuto("BBM"));
+                m_chooser.addOption("MM1", new PathPlannerAuto("MM1"));
+                m_chooser.addOption("MM2", new PathPlannerAuto("MM2"));
+                m_chooser.addOption("MM3", new PathPlannerAuto("MM3"));
+                m_chooser.addOption("TTM1", new PathPlannerAuto("TTM1"));
+                m_chooser.addOption("TTM2", new PathPlannerAuto("TTM2"));
+                m_chooser.addOption("TTM3", new PathPlannerAuto("TTM3"));
+                m_chooser.addOption("TT123-", new PathPlannerAuto("TT123-"));
                 
         }
 

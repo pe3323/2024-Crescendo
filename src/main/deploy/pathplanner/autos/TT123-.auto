@@ -5,7 +5,7 @@
       "x": 0.6619978954243629,
       "y": 6.538118219093581
     },
-    "rotation": -121.32869286780416
+    "rotation": -121.26373169437743
   },
   "command": {
     "type": "sequential",
@@ -44,13 +44,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Top Note To Middle Note"
+            "pathName": "Top-One"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "One-Shoot"
           }
         },
         {
@@ -74,7 +80,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Middle to Two"
+            "pathName": "Shoot-Two"
           }
         },
         {
@@ -105,6 +111,18 @@
           "type": "named",
           "data": {
             "name": "shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shoot-Three"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intake"
           }
         }
       ]

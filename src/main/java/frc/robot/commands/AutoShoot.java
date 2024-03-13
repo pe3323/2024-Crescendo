@@ -17,6 +17,7 @@ public class AutoShoot
   
   private final Shooter shooter;
   private final Intake intake;
+  private Timer timer;
   /**
    * Creates a new AutoShoot
    * .
@@ -34,7 +35,7 @@ public class AutoShoot
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Timer time = new Timer();
+    timer = new Timer();
 
   }
 
@@ -46,20 +47,30 @@ public class AutoShoot
 
     if (shooter.getRPM() > 5200) { 
             intake.raise();
-            
-            
+            timer.start();
+
     }
+
+
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+
+    intake.stop();
+    shooter.stop();
+    // need to stop the shooter, intake
+    // and stop the timer.
+
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.hasElapsed(1);
     
   }
 }
