@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       
-      lightingSubsystem.setSolidColor (153, 212, 102);
+      lightingSubsystem.setSolidColor (180, 255, 113);
       m_autonomousCommand.schedule();
       
     }

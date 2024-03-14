@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -105,6 +106,18 @@ public class Limelight extends SubsystemBase {
   }
 
   public int getClosestAprilTag() {
+
+   
+    var alliance = DriverStation.getAlliance();
+      if (alliance.get() == DriverStation.Alliance.Red && (int) tid.getInteger(-1) == 7){
+          return -1;
+      }
+
+      if (alliance.get() == DriverStation.Alliance.Blue && (int) tid.getInteger(-1) == 4){
+          return -1;
+      }
+      
+
     return (int) tid.getInteger(-1);
   }
 

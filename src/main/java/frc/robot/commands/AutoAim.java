@@ -7,6 +7,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.Limelight;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -42,8 +43,16 @@ private final Lighting lighting;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    int targetTag = 4;
+    var alliance = DriverStation.getAlliance();
+      if (alliance.get() == DriverStation.Alliance.Red){
+          targetTag = 4;
+      }
+      else{
+          targetTag = 7;
+      }
 
-  double targetRadians = Math.atan(ShooterConstants.goalHeight/(limelightSubsystem.getDistanceToTag(4) - 9 ));
+  double targetRadians = Math.atan(ShooterConstants.goalHeight/(limelightSubsystem.getDistanceToTag(targetTag) - 9 ));
 
   double targetAngle = targetRadians * (180/Math.PI);
   SmartDashboard.putNumber("target angle", targetAngle);
