@@ -103,6 +103,9 @@ public class RobotContainer {
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser
+                m_chooser.setDefaultOption("T", new PathPlannerAuto("T"));
+                m_chooser.setDefaultOption("M", new PathPlannerAuto("M"));
+                m_chooser.setDefaultOption("B", new PathPlannerAuto("B"));
                 m_chooser.setDefaultOption("TTMB", new PathPlannerAuto("TTMB"));
                 m_chooser.addOption("BBMT", new PathPlannerAuto("BBMT"));
                 m_chooser.addOption("MMTB", new PathPlannerAuto("MMTB"));

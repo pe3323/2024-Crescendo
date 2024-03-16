@@ -19,7 +19,6 @@ public class Intake extends SubsystemBase {
         intake = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); // makes new motor controller that is
                                                                                  // defined as the motor for the arm
         intake.restoreFactoryDefaults();
-        intake.setInverted(true);
         intake.getEncoder().setPosition(0);
 
         pidController = intake.getPIDController();
@@ -30,7 +29,7 @@ public class Intake extends SubsystemBase {
         pidController.setFF(0);
         pidController.setOutputRange(-1, 1);
 
-        sensor = new DigitalInput(0);
+        sensor = new DigitalInput(1);
     }
 
     public boolean HasNote() {
@@ -40,7 +39,7 @@ public class Intake extends SubsystemBase {
 
     public void raise() { // raises the roof
 
-        intake.set(.20);
+        intake.set(-.20);
         SmartDashboard.putBoolean("Sensor Value", sensor.get());
         
 
@@ -49,7 +48,7 @@ public class Intake extends SubsystemBase {
     // Calamari
     public void lower() { // lowers the roof
 
-        intake.set(-.1);
+        intake.set(.1);
         
 
     }

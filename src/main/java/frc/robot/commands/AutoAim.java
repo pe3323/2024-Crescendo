@@ -57,9 +57,9 @@ private final Lighting lighting;
   double targetAngle = targetRadians * (180/Math.PI);
   SmartDashboard.putNumber("target angle", targetAngle);
 
-  if (targetAngle<65 && targetAngle>47){
+  if (targetAngle<65 && targetAngle>38){
 
-   double targetPosition= ( targetAngle - 47) / ShooterConstants.degreePerRot;
+   double targetPosition= ( targetAngle - 38) / ShooterConstants.degreePerRot;
 
     shooter.setPosition(targetPosition);
     SmartDashboard.putNumber("targetPosition", targetPosition);
@@ -67,7 +67,7 @@ private final Lighting lighting;
     lighting.setSolidColor(247, 191, 235);
   }
 
-  else if (targetAngle<= 47){
+  else if (targetAngle<= 38){
 
     shooter.setPosition(0.0);
 

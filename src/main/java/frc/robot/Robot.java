@@ -24,7 +24,7 @@ import frc.robot.subsystems.Lighting;
  */
 public class Robot extends TimedRobot {
 
-  private final Lighting lightingSubsystem = new Lighting(0);
+  //private final Lighting lightingSubsystem = new Lighting(0);
 
   final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(24);
   final double TARGET_HEIGHT_METERS = Units.feetToMeters(5);
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       
-      lightingSubsystem.setSolidColor (180, 255, 113);
+      //lightingSubsystem.setSolidColor (180, 255, 113);
       m_autonomousCommand.schedule();
       
     }
@@ -117,13 +117,13 @@ public class Robot extends TimedRobot {
     
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-      var alliance = DriverStation.getAlliance();
-      if (alliance.get() == DriverStation.Alliance.Red){
-        lightingSubsystem.setSolidColor (227, 5, 5);
-      }
-      else{
-        lightingSubsystem.setSolidColor (62, 62, 255);
-      }
+      //var alliance = DriverStation.getAlliance();
+      //if (alliance.get() == DriverStation.Alliance.Red){
+        //lightingSubsystem.setSolidColor (227, 5, 5);
+      //}
+      //else{
+        //lightingSubsystem.setSolidColor (62, 62, 255);
+      //}
     }
   }
 
