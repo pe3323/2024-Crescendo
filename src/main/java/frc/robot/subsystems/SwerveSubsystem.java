@@ -27,14 +27,14 @@ import frc.robot.Constants.DriveConstants;
 
 public class SwerveSubsystem extends SubsystemBase {
     
-    StructArrayPublisher<SwerveModuleState> publisher = NetworkTableInstance.getDefault()
-        .getStructArrayTopic("current states", SwerveModuleState.struct).publish();
+    StructArrayPublisher<SwerveModuleState> publisher = NetworkTableInstance.getDefault().getTable("Swerve")
+        .getStructArrayTopic("current Array states", SwerveModuleState.struct).publish();
 
-    StructArrayPublisher<SwerveModuleState> publisher2 = NetworkTableInstance.getDefault()
-    .getStructArrayTopic("Desired states", SwerveModuleState.struct).publish();
+    StructArrayPublisher<SwerveModuleState> publisher2 = NetworkTableInstance.getDefault().getTable("Swerve")
+    .getStructArrayTopic("Desired Array states", SwerveModuleState.struct).publish();
 
-    StructArrayPublisher<Pose2d> arrayPublisher = NetworkTableInstance.getDefault()
-    .getStructArrayTopic("MyPoseArray", Pose2d.struct).publish();
+    //StructArrayPublisher<Pose2d> arrayPublisher = NetworkTableInstance.getDefault()
+    //.getStructArrayTopic("MyPoseArray", Pose2d.struct).publish();
 
     private final SwerveModule frontLeft = new SwerveModule(
             DriveConstants.kFrontLeftDriveMotorPort,
@@ -193,7 +193,10 @@ public SwerveModulePosition[] getModulePositions(){
             SmartDashboard.putNumber("Left Back Swerve Absolute: ", backLeft.getAbsoluteEncoderRad());
             SmartDashboard.putNumber("Right Back Swerve Absolute: ", backRight.getAbsoluteEncoderRad());
 
-            
+            SmartDashboard.putNumber("Left Front Drive Position: ", frontLeft.getDrivePosition());
+            SmartDashboard.putNumber("Right Front Drive Position: ", frontRight.getDrivePosition());
+            SmartDashboard.putNumber("Left Back Drive Position: ", backLeft.getDrivePosition());
+            SmartDashboard.putNumber("Right Back Drive Position: ", backRight.getDrivePosition());
     }
 
     public void stopModules() {
@@ -206,7 +209,8 @@ public SwerveModulePosition[] getModulePositions(){
     public void setModuleStates(SwerveModuleState[] desiredStates) {
 
         SwerveModuleState[] currentStates = {frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState()};
-
+        publisher.set(currentStates);
+        publisher2.set(desiredStates);
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         frontLeft.setDesiredState(desiredStates[0]);
         frontRight.setDesiredState(desiredStates[1]);
@@ -214,9 +218,8 @@ public SwerveModulePosition[] getModulePositions(){
         backRight.setDesiredState(desiredStates[3]);
 
         
-    publisher.set(currentStates);
-    publisher2.set(desiredStates);
-    arrayPublisher.set(new Pose2d[] {getPose()});
+    
+    //arrayPublisher.set(new Pose2d[] {getPose()});
 
         
         

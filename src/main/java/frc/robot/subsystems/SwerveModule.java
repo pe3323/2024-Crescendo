@@ -57,7 +57,7 @@ public class SwerveModule {
         driveEncoder.setVelocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
         turningEncoder.setPositionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
         turningEncoder.setVelocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
-        turningPidController = new PIDController(ModuleConstants.kPTurning, 0, 0);
+        turningPidController = new PIDController(ModuleConstants.kPTurning, ModuleConstants.kITurning, ModuleConstants.kDTurning);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
         //drivePidController = new PIDController(ModuleConstants.kPDriving, 0, 0);
          
@@ -74,7 +74,7 @@ public class SwerveModule {
     }
 
     public double getDrivePosition() {
-        SmartDashboard.putNumber("Drive Position " + driveId, driveEncoder.getPosition());
+        //SmartDashboard.putNumber("Drive Position " + driveId, driveEncoder.getPosition());
         return driveEncoder.getPosition();
     }
 

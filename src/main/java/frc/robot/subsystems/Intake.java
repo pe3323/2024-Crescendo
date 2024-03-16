@@ -39,7 +39,7 @@ public class Intake extends SubsystemBase {
 
     public void raise() { // raises the roof
 
-        intake.set(-.20);
+        intake.set(-.25);
         SmartDashboard.putBoolean("Sensor Value", sensor.get());
         
 

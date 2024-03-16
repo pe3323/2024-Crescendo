@@ -21,7 +21,6 @@ public class NeoClimber extends SubsystemBase implements Climber {
       motor1.restoreFactoryDefaults();
       motor1.enableSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, true);
       motor1.setSoftLimit(CANSparkBase.SoftLimitDirection.kReverse, 0);
-      
   }
   
   public void raise(){    
