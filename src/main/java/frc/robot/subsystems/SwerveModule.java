@@ -25,7 +25,7 @@ public class SwerveModule {
     private final RelativeEncoder turningEncoder;
 
     private final PIDController turningPidController;
-    //private final PIDController drivePidController;
+    private final PIDController drivePidController;
 
     private final AnalogInput absoluteEncoder;
     private final boolean absoluteEncoderReversed;
@@ -59,7 +59,7 @@ public class SwerveModule {
         turningEncoder.setVelocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
         turningPidController = new PIDController(ModuleConstants.kPTurning, ModuleConstants.kITurning, ModuleConstants.kDTurning);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
-        //drivePidController = new PIDController(ModuleConstants.kPDriving, 0, 0);
+        drivePidController = new PIDController(ModuleConstants.kPDriving, 0, 0);
          
         
 
@@ -126,12 +126,12 @@ public class SwerveModule {
             return;
         }
         state = SwerveModuleState.optimize(state, getState().angle);
-        driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
+        //driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
         SmartDashboard.putString("Target Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
         SmartDashboard.putString("Current Swerve[" + absoluteEncoder.getChannel() + "] state", getState().toString());
 
-        //driveMotor.set(drivePidController.calculate(getDriveVelocity() / DriveConstants.kPhysicalMaxSpeedMetersPerSecond, state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
+        driveMotor.set(drivePidController.calculate(getDriveVelocity() / DriveConstants.kPhysicalMaxSpeedMetersPerSecond, state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
     }
 
     public void stop() {

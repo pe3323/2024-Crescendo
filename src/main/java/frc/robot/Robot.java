@@ -35,7 +35,6 @@ public class Robot extends TimedRobot {
   final double GOAL_RANGE_METERS = Units.feetToMeters(3);
 
 
- PhotonCamera camera = new PhotonCamera("photonvision");
 
     // PID constants should be tuned per robot
     final double LINEAR_P = 0.1;

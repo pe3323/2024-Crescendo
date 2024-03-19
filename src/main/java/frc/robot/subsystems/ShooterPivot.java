@@ -43,9 +43,13 @@ public class ShooterPivot extends SubsystemBase{
        SmartDashboard.putNumber("pivotMotor Position"  +  pivotMotor.getDeviceId(), targetPosition);
        pid.setReference(targetPosition, CANSparkMax.ControlType.kPosition);
 
-
-
     }
+
+    public boolean isInMotion() {
+        return pivotMotor.get() == 0.0;
+    }
+
+
     public void stop(){ //stops the motor
         pivotMotor.set(0);
     }

@@ -18,7 +18,7 @@ public final class Constants {
         public static final double kPTurning = 1.15;
         public static final double kITurning = 0.0;
         public static final double kDTurning = 0.0;
-        public static final double kPDriving = 0.0;
+        public static final double kPDriving = 1.05;
     }
 
     public static final class DriveConstants {
@@ -112,15 +112,15 @@ public final class Constants {
     }
 
     public static final class VisionConstants {
-        public static final double cameraHeight = 18.25; //Inches
+        public static final double cameraHeight = 20.5; //Inches
         public static final double apriltagHeight = 54.0; //Inches
-        public static final double cameraAngle = 14; //Degrees
+        public static final double cameraAngle = 16; //Degrees
     }
 
     public static final class ShooterConstants {
         
         public static final double degreePerRot = 2.2;
-        public static final double goalHeight = 77.0;//inches
+        public static final double goalHeight = 83.0;//inches
         public static final int intake = 11;
         public static final int shooter1 = 9;
         public static final int shooter2 = 10;

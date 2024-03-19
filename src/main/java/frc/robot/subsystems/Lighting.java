@@ -25,14 +25,15 @@ public class Lighting extends SubsystemBase{
     // Set the data
     m_led.setData(m_ledBuffer);
     m_led.start();
-    
+
     // Set default color to purple
     var alliance = DriverStation.getAlliance();
-    if (alliance.get() == DriverStation.Alliance.Red){
-        setSolidColor (227, 5, 5);
-    }
-    else{
-        setSolidColor (62, 62, 255);
+    if (alliance != null) {
+        if (alliance.get() == DriverStation.Alliance.Red) {
+            setSolidColor(227, 5, 5);
+        } else {
+            setSolidColor(62, 62, 255);
+        }
     }
 
 

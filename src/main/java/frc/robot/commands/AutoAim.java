@@ -21,6 +21,9 @@ public class AutoAim extends Command {
 private final Limelight limelightSubsystem;
 private final ShooterPivot shooter;
 private final Lighting lighting;
+private  double targetPosition = 0.0;
+private int targetTag = -1;
+private boolean aimed = false;
   
   /**
    * Creates a new ExampleCommand.
@@ -32,18 +35,15 @@ private final Lighting lighting;
     this.limelightSubsystem = limelightSubsystem;
     this.shooter = shooter;
     this.lighting = lighting;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(limelightSubsystem, shooter, lighting);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    int targetTag = 4;
+  public void initialize() {
+     targetTag = 4;
     var alliance = DriverStation.getAlliance();
       if (alliance.get() == DriverStation.Alliance.Red){
           targetTag = 4;
@@ -51,39 +51,49 @@ private final Lighting lighting;
       else{
           targetTag = 7;
       }
-
-  double targetRadians = Math.atan(ShooterConstants.goalHeight/(limelightSubsystem.getDistanceToTag(targetTag) - 9 ));
-
-  double targetAngle = targetRadians * (180/Math.PI);
-  SmartDashboard.putNumber("target angle", targetAngle);
-
-  if (targetAngle<65 && targetAngle>38){
-
-   double targetPosition= ( targetAngle - 38) / ShooterConstants.degreePerRot;
-
-    shooter.setPosition(targetPosition);
-    SmartDashboard.putNumber("targetPosition", targetPosition);
-
-    lighting.setSolidColor(247, 191, 235);
   }
 
-  else if (targetAngle<= 38){
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    aimed = false;
+    double targetRadians = Math
+        .atan(ShooterConstants.goalHeight / (limelightSubsystem.getDistanceToTag(targetTag) -19 ));
 
-    shooter.setPosition(0.0);
+    double targetAngle = targetRadians * (180 / Math.PI);
+    SmartDashboard.putNumber("target angle", targetAngle);
 
-  }
+    if (targetAngle < 65 && targetAngle >= 38) {
+      aimed = true;
+      SmartDashboard.putBoolean("In Range",true);
+
+      targetPosition = (targetAngle - 38) / ShooterConstants.degreePerRot;
+
+      shooter.setPosition(targetPosition);
+      SmartDashboard.putNumber("targetPosition", targetPosition);
+
+      lighting.setSolidColor(247, 191, 235);
+    }
+
+    else{ // if (targetAngle < 38) {
+      //targetPosition = 0.0;
+      SmartDashboard.putBoolean("In Range",false);
+      lighting.setSolidColor(255,222,89);
+      //shooter.setPosition(0.0);
+
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    lighting.setSolidColor (160,0,255);
+    if (aimed)
+      lighting.setSolidColor (160,0,255);
   }
 
-  // Returns true when the command should end.
+  // Continue until shooter is in place.
   @Override
   public boolean isFinished() {
     return true;
-
   }
 }
