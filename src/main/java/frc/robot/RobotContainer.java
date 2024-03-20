@@ -104,19 +104,19 @@ public class RobotContainer {
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser
-                m_chooser.setDefaultOption("T", new PathPlannerAuto("T"));
+                // Simple one note and get out of the way
+                m_chooser.setDefaultOption("Do Nothing", new SequentialCommandGroup(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem), new AutoShoot(intakeSubsystem, shooterSubsystem)));
+
+                m_chooser.addOption("T", new PathPlannerAuto("T"));
                 m_chooser.addOption("M", new PathPlannerAuto("M"));
                 m_chooser.addOption("B", new PathPlannerAuto("B"));
-                m_chooser.addOption("TTMB", new PathPlannerAuto("TTMB"));
-                m_chooser.addOption("BBMT", new PathPlannerAuto("BBMT"));
-                m_chooser.addOption("MMTB", new PathPlannerAuto("MMTB"));
+
+                // Two note autonomous
                 m_chooser.addOption("BB", new PathPlannerAuto("BB"));
                 m_chooser.addOption("TT", new PathPlannerAuto("TT"));
                 m_chooser.addOption("MM", new PathPlannerAuto("MM"));
-                m_chooser.addOption("TT1", new PathPlannerAuto("TT1"));
-                m_chooser.addOption("BB5", new PathPlannerAuto("BB5"));
-                m_chooser.addOption("BB4", new PathPlannerAuto("BB4"));
-                m_chooser.addOption("BB3", new PathPlannerAuto("BB3"));
+
+                // 3 note autonomous
                 m_chooser.addOption("TTM", new PathPlannerAuto("TTM"));
                 m_chooser.addOption("MMT", new PathPlannerAuto("MMT"));
                 m_chooser.addOption("MMB", new PathPlannerAuto("MMB"));
@@ -124,6 +124,15 @@ public class RobotContainer {
                 m_chooser.addOption("MM1", new PathPlannerAuto("MM1"));
                 m_chooser.addOption("MM2", new PathPlannerAuto("MM2"));
                 m_chooser.addOption("MM3", new PathPlannerAuto("MM3"));
+                m_chooser.addOption("TT1", new PathPlannerAuto("TT1"));
+                m_chooser.addOption("BB5", new PathPlannerAuto("BB5"));
+                m_chooser.addOption("BB4", new PathPlannerAuto("BB4"));
+                m_chooser.addOption("BB3", new PathPlannerAuto("BB3"));
+
+                // 4 note autonomous 
+                m_chooser.addOption("TTMB", new PathPlannerAuto("TTMB"));
+                m_chooser.addOption("BBMT", new PathPlannerAuto("BBMT"));
+                m_chooser.addOption("MMTB", new PathPlannerAuto("MMTB"));
                 m_chooser.addOption("TTM1", new PathPlannerAuto("TTM1"));
                 m_chooser.addOption("TTM2", new PathPlannerAuto("TTM2"));
                 m_chooser.addOption("TTM3", new PathPlannerAuto("TTM3"));

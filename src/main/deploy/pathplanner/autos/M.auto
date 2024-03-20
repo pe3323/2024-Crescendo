@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.1311005479153822,
-      "y": 5.52661562465982
+      "x": 1.1604194636960707,
+      "y": 5.599912914111543
     },
-    "rotation": -178.4046198402271
+    "rotation": -178.35891694367734
   },
   "command": {
     "type": "sequential",
@@ -15,12 +15,6 @@
           "type": "named",
           "data": {
             "name": "aim"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
           }
         },
         {

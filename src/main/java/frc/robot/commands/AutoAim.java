@@ -63,7 +63,7 @@ private boolean aimed = false;
     double targetAngle = targetRadians * (180 / Math.PI);
     SmartDashboard.putNumber("target angle", targetAngle);
 
-    if (targetAngle < 65 && targetAngle >= 38) {
+    if (targetAngle < 68 && targetAngle >= 38) {
       aimed = true;
       SmartDashboard.putBoolean("In Range",true);
 
@@ -76,10 +76,10 @@ private boolean aimed = false;
     }
 
     else{ // if (targetAngle < 38) {
-      //targetPosition = 0.0;
+      targetPosition = 0.0;
       SmartDashboard.putBoolean("In Range",false);
       lighting.setSolidColor(255,222,89);
-      //shooter.setPosition(0.0);
+      shooter.setPosition(0.0);
 
     }
   }

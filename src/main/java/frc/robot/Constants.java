@@ -18,7 +18,7 @@ public final class Constants {
         public static final double kPTurning = 1.15;
         public static final double kITurning = 0.0;
         public static final double kDTurning = 0.0;
-        public static final double kPDriving = 1.05;
+        public static final double kPDriving = 1.005;
     }
 
     public static final class DriveConstants {
