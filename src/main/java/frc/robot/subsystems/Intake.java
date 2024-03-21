@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -19,6 +20,7 @@ public class Intake extends SubsystemBase {
         intake = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushless); // makes new motor controller that is
                                                                                  // defined as the motor for the arm
         intake.restoreFactoryDefaults();
+        intake.setIdleMode(IdleMode.kBrake);
         intake.getEncoder().setPosition(0);
 
         pidController = intake.getPIDController();

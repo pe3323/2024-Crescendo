@@ -155,7 +155,7 @@ public class RobotContainer {
                         }
                 });
 
-                yButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)));
+                yShooterButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)));
 
                 leftBumper.onTrue(new Command() {
                         @Override

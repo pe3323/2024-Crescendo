@@ -18,7 +18,7 @@ public final class Constants {
         public static final double kPTurning = 1.15;
         public static final double kITurning = 0.0;
         public static final double kDTurning = 0.0;
-        public static final double kPDriving = 1.005;
+        public static final double kPDriving = 1.00;
     }
 
     public static final class DriveConstants {
@@ -86,7 +86,7 @@ public final class Constants {
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = DriveConstants.kPhysicalMaxSpeedMetersPerSecond / 4;
         public static final double kMaxAngularSpeedRadiansPerSecond = //
-                DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
+                DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 5; //Was 10
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
         public static final double kPXController = 1.5;
@@ -112,14 +112,14 @@ public final class Constants {
     }
 
     public static final class VisionConstants {
-        public static final double cameraHeight = 20.5; //Inches
+        public static final double cameraHeight = 21.25; //Inches
         public static final double apriltagHeight = 54.0; //Inches
         public static final double cameraAngle = 16; //Degrees
     }
 
     public static final class ShooterConstants {
         
-        public static final double degreePerRot = 2.2;
+        public static final double degreePerRot = 2.05;
         public static final double goalHeight = 83.0;//inches
         public static final int intake = 11;
         public static final int shooter1 = 9;

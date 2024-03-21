@@ -57,17 +57,20 @@ private boolean aimed = false;
   @Override
   public void execute() {
     aimed = false;
-    double targetRadians = Math
-        .atan(ShooterConstants.goalHeight / (limelightSubsystem.getDistanceToTag(targetTag) -19 ));
+    double camDistance = limelightSubsystem.getDistanceToTag(targetTag);
+    double targetRadians = Math.atan(ShooterConstants.goalHeight / (camDistance - 18 )); //9
 
     double targetAngle = targetRadians * (180 / Math.PI);
     SmartDashboard.putNumber("target angle", targetAngle);
 
-    if (targetAngle < 68 && targetAngle >= 38) {
+    double modifiedAngle = targetAngle + modifier(camDistance);
+
+    if (modifiedAngle < 68 && modifiedAngle >= 38) {
       aimed = true;
       SmartDashboard.putBoolean("In Range",true);
+      SmartDashboard.putNumber("Shooting Angle", modifiedAngle);
 
-      targetPosition = (targetAngle - 38) / ShooterConstants.degreePerRot;
+      targetPosition = (modifiedAngle - 38) / ShooterConstants.degreePerRot;
 
       shooter.setPosition(targetPosition);
       SmartDashboard.putNumber("targetPosition", targetPosition);
@@ -88,12 +91,26 @@ private boolean aimed = false;
   @Override
   public void end(boolean interrupted) {
     if (aimed)
-      lighting.setSolidColor (160,0,255);
+      lighting.setSolidColor (0,255,0);
+    aimed = false;
   }
 
   // Continue until shooter is in place.
   @Override
   public boolean isFinished() {
     return true;
+  }
+
+  private double modifier(double distance ){
+    if (distance < 79)
+    return 0;
+    if (distance <= 103)
+    return 2;
+    if (distance <= 122)
+    return 6;
+    if ( distance <= 140 )
+     return 6;
+
+    return 0;
   }
 }

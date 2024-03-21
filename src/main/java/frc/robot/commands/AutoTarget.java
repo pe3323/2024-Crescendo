@@ -39,7 +39,7 @@ public class AutoTarget extends Command {
     double percentError = Math.abs(limelightSubsystem.getTx() / 27.0);
     double turningSpeed = 0;
     if (percentError >= 0.5) {
-      turningSpeed = limelightSubsystem.getTx() > 0 ? -1.0 : 1.0;
+      turningSpeed = limelightSubsystem.getTx() > 0 ? -3.0 : 3.0;
     } else if (percentError >= 0.15) {
       turningSpeed = limelightSubsystem.getTx() > 0 ? -.5 : .5;
     } else if (percentError >= 0.02) {
