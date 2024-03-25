@@ -30,6 +30,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.AutoAim;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTarget;
@@ -204,7 +205,7 @@ public class RobotContainer {
                 aShooterButton.onTrue(new Command() {
                         @Override
                         public void execute() {
-                                shooterPivotSubsystem.setPosition(5);
+                                shooterPivotSubsystem.setPosition((58 - 38) / ShooterConstants.degreePerRot);
                         }
 
                         public boolean isFinished() {

@@ -76,7 +76,7 @@ public final class Constants {
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
         
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond - 1;
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond - 0.5;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = 
                 kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
@@ -113,7 +113,7 @@ public final class Constants {
 
     public static final class VisionConstants {
         public static final double cameraHeight = 21.25; //Inches
-        public static final double apriltagHeight = 54.0; //Inches
+        public static final double apriltagHeight = 57.0; //Inches
         public static final double cameraAngle = 16; //Degrees
     }
 

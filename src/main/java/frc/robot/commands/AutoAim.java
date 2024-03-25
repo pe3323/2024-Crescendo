@@ -105,11 +105,11 @@ private boolean aimed = false;
     if (distance < 79)
     return 0;
     if (distance <= 103)
-    return 2;
+    return 3;
     if (distance <= 122)
-    return 6;
+    return 7;
     if ( distance <= 140 )
-     return 6;
+     return 7;
 
     return 0;
   }

@@ -41,7 +41,7 @@ public class AutoTarget extends Command {
     if (percentError >= 0.5) {
       turningSpeed = limelightSubsystem.getTx() > 0 ? -3.0 : 3.0;
     } else if (percentError >= 0.15) {
-      turningSpeed = limelightSubsystem.getTx() > 0 ? -.5 : .5;
+      turningSpeed = limelightSubsystem.getTx() > 0 ? -.5: .5;
     } else if (percentError >= 0.02) {
       turningSpeed = limelightSubsystem.getTx() > 0 ? -.30 : .30;
     }
