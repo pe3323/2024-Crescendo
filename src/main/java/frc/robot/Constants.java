@@ -18,7 +18,7 @@ public final class Constants {
         public static final double kPTurning = 1.15;
         public static final double kITurning = 0.0;
         public static final double kDTurning = 0.0;
-        public static final double kPDriving = 1.00;
+        public static final double kPDriving = 0.05;
     }
 
     public static final class DriveConstants {
@@ -72,13 +72,13 @@ public final class Constants {
         public static final double kFrontRightDriveAbsoluteEncoderOffsetRad =  5.37;//5.118; //5.06; //5.05; // ID 2
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad =  4.47;//1.334; //0.48; //0.81; // ID 1
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 4.6;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
         
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond - 0.5;
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = 
-                kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
+                kPhysicalMaxAngularSpeedRadiansPerSecond ;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
     }

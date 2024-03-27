@@ -4,6 +4,8 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -51,6 +53,8 @@ public class SwerveModule {
         driveMotor.setInverted(driveMotorReversed);
         turningMotor.setInverted(turningMotorReversed);
 
+        driveMotor.setIdleMode(IdleMode.kBrake);
+
         driveEncoder = driveMotor.getEncoder();
         turningEncoder = turningMotor.getEncoder();
         driveEncoder.setPositionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
@@ -59,8 +63,9 @@ public class SwerveModule {
         turningEncoder.setVelocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
         turningPidController = new PIDController(ModuleConstants.kPTurning, ModuleConstants.kITurning, ModuleConstants.kDTurning);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
+
         drivePidController = new PIDController(ModuleConstants.kPDriving, 0, 0);
-         
+        driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
         
 
         new Thread(() -> {
@@ -131,7 +136,19 @@ public class SwerveModule {
         SmartDashboard.putString("Target Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
         SmartDashboard.putString("Current Swerve[" + absoluteEncoder.getChannel() + "] state", getState().toString());
 
-        driveMotor.set(drivePidController.calculate(getDriveVelocity() / DriveConstants.kPhysicalMaxSpeedMetersPerSecond, state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
+        SmartDashboard.putNumber("Target Velocity" + driveId, state.speedMetersPerSecond);
+        SmartDashboard.putNumber("Calculated Velocity" + driveId, drivePidController.calculate(getDriveVelocity()/3,  state.speedMetersPerSecond/3 ));
+
+        /** Why are we dividing by 5 here?  */
+        //driveMotor.set(drivePidController.calculate(getDriveVelocity() / DriveConstants.kPhysicalMaxSpeedMetersPerSecond, state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
+       
+        //double target = drivePidController.calculate(getDriveVelocity()/5 , state.speedMetersPerSecond );
+        //if ( target < DriveConstants.kPhysicalMaxSpeedMetersPerSecond)
+        //    driveMotor.set(target);
+
+        driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond );
+
+
     }
 
     public void stop() {
