@@ -31,6 +31,7 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.commands.Aim;
 import frc.robot.commands.AutoAim;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTarget;
@@ -78,6 +79,7 @@ public class RobotContainer {
         public Trigger opRightBumper = shooterJoytick.rightBumper();
         public Trigger leftTrigger = shooterJoytick.leftTrigger();
         public Trigger rightTrigger = shooterJoytick.rightTrigger();
+        public Trigger startTrigger = shooterJoytick.start();
 
         SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -101,7 +103,10 @@ public class RobotContainer {
                 NamedCommands.registerCommand("intake",
                                 new IntakeNote(intakeSubsystem, lightingSubsystem));   
                 NamedCommands.registerCommand("aim",
-                                new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem));             
+                                new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)); 
+                NamedCommands.registerCommand("aimSpeaker", new Aim(shooterPivotSubsystem,63));     
+                NamedCommands.registerCommand("aimMid", new Aim(shooterPivotSubsystem,41)); 
+                NamedCommands.registerCommand("aimBottom", new Aim(shooterPivotSubsystem,39));      
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser
@@ -205,7 +210,7 @@ public class RobotContainer {
                 aShooterButton.onTrue(new Command() {
                         @Override
                         public void execute() {
-                                shooterPivotSubsystem.setPosition((58 - 38) / ShooterConstants.degreePerRot);
+                                shooterPivotSubsystem.setPosition((63 - 38) / ShooterConstants.degreePerRot);
                         }
 
                         public boolean isFinished() {
@@ -280,6 +285,15 @@ public class RobotContainer {
                                 return false;
                         }
                 }); 
+
+                startTrigger.onTrue(new Command() {
+                        public void execute(){
+                               double x= SmartDashboard.getNumber("Angle to set", 0);
+                                shooterPivotSubsystem.setPosition((x- 38) / ShooterConstants.degreePerRot);
+
+
+                        }
+                });   
                 
         }
         public Command getAutonomousCommand() {
