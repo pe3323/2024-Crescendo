@@ -14,7 +14,13 @@
         {
           "type": "named",
           "data": {
-            "name": "aim"
+            "name": "aimSpeaker"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
           }
         },
         {

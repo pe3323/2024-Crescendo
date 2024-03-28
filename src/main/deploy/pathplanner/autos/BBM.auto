@@ -14,7 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": "aim"
+            "name": "aimSpeaker"
           }
         },
         {
@@ -30,15 +30,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Bottom Note Path"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "intake"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Bottom Note Path"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "intake"
+                }
+              }
+            ]
           }
         },
         {
@@ -50,7 +57,7 @@
         {
           "type": "named",
           "data": {
-            "name": "aim"
+            "name": "aimBottom"
           }
         },
         {
@@ -66,21 +73,28 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Bottom Note To Middle Note"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Bottom Note To Middle Note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "intake"
+                }
+              }
+            ]
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "intake"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "aim"
+            "name": "aimMid"
           }
         },
         {

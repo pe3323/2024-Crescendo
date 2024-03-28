@@ -86,7 +86,7 @@ public class RobotContainer {
                                 new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)); 
                 NamedCommands.registerCommand("aimSpeaker", new Aim(shooterPivotSubsystem,63));     
                 NamedCommands.registerCommand("aimMid", new Aim(shooterPivotSubsystem,41)); 
-                NamedCommands.registerCommand("aimBottom", new Aim(shooterPivotSubsystem,39));      
+                NamedCommands.registerCommand("aimBottom", new Aim(shooterPivotSubsystem,41));      
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser
