@@ -50,7 +50,7 @@ public class Intake extends SubsystemBase {
     // Calamari
     public void lower() { // lowers the roof
 
-        intake.set(.1);
+        intake.set(.3);
         
 
     }
