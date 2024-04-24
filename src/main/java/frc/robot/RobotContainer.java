@@ -290,6 +290,10 @@ public class RobotContainer {
 
 
                         }
+
+                        public boolean isFinished(){
+                                return true;
+                        }
                 });   
                 
         }
