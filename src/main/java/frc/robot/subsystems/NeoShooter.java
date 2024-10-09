@@ -5,6 +5,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,9 +28,11 @@ public class NeoShooter extends SubsystemBase implements Shooter{
         motor1.restoreFactoryDefaults(); 
         motor1.getEncoder().setPosition(0);
         motor1.setInverted(true);
+        motor1.setIdleMode(IdleMode.kBrake);
         motor2.restoreFactoryDefaults(); 
         motor2.getEncoder().setPosition(0);
         motor2.setInverted(true);
+        motor2.setIdleMode(IdleMode.kBrake);
  
     }
     public void setSpeed(double speedInpercent){ //changes speed of motors

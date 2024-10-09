@@ -60,7 +60,7 @@ private boolean aimed = false;
     double camDistance = limelightSubsystem.getDistanceToTag(targetTag);
     double targetRadians = Math.atan(ShooterConstants.goalHeight / (camDistance - 18 )); //9
 
-    double targetAngle = targetRadians * (180 / Math.PI);
+    double targetAngle = targetRadians * (180 / Math.PI); 
     SmartDashboard.putNumber("target angle", targetAngle);
 
     double modifiedAngle = targetAngle + modifier(camDistance);

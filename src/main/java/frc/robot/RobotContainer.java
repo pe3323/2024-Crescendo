@@ -49,6 +49,8 @@ public class RobotContainer {
        public Trigger rightBumper = driverJoytick.rightBumper();
         public Trigger xButton = driverJoytick.x();
        public Trigger yButton = driverJoytick.y();
+       //public Trigger dPad = driverJoytick.
+
 
         private final CommandXboxController shooterJoytick = new CommandXboxController(OIConstants.kShooterControllerPort);
         public Trigger bShooterButton = shooterJoytick.b();
@@ -85,8 +87,8 @@ public class RobotContainer {
                 NamedCommands.registerCommand("aim",
                                 new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)); 
                 NamedCommands.registerCommand("aimSpeaker", new Aim(shooterPivotSubsystem,63));     
-                NamedCommands.registerCommand("aimMid", new Aim(shooterPivotSubsystem,41)); 
-                NamedCommands.registerCommand("aimBottom", new Aim(shooterPivotSubsystem,41));      
+                NamedCommands.registerCommand("aimMid", new Aim(shooterPivotSubsystem,38)); 
+                NamedCommands.registerCommand("aimBottom", new Aim(shooterPivotSubsystem,38));      
                 configureButtonBindings();
 
                 // Add commands to the autonomous command chooser

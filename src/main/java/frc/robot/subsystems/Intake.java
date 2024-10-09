@@ -35,7 +35,7 @@ public class Intake extends SubsystemBase {
     }
 
     public boolean HasNote() {
-        return !sensor.get();
+        return sensor.get();
 
     }
 
@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
 
     }
 
-    public double getposition() { // sets position
+    public double getposition() { // gets position
         return intake.getEncoder().getPosition();
     }
 

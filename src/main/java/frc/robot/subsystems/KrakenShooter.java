@@ -2,12 +2,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxAlternateEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,10 +11,6 @@ import frc.robot.Constants.ShooterConstants;
 
 public class KrakenShooter extends SubsystemBase implements Shooter {
     private final TalonFX motor1, motor2;
-    private static final int kCPR = 8192;
-    private RelativeEncoder m_alternateEncoder;
-    private double armSpeed = 0.5;
-    SparkMaxPIDController pid;
 
     public KrakenShooter(){
         motor1= new TalonFX(ShooterConstants.shooter1); //makes new motor controller that is defined as the motor for the arm
