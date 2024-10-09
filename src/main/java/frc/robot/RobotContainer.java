@@ -143,7 +143,7 @@ public class RobotContainer {
                         }
                 });
 
-                yShooterButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)));
+                //yShooterButton.onTrue(new AutoTarget(limelightSubsystem, swerveSubsystem, shooterPivotSubsystem).andThen(new AutoAim(limelightSubsystem, shooterPivotSubsystem, lightingSubsystem)));
 
                 leftBumper.onTrue(new Command() {
                         @Override
@@ -199,6 +199,23 @@ public class RobotContainer {
                                 return true;
                         }
                 });
+
+                yShooterButton.whileTrue(new Command() {
+                        public void execute() {
+                                
+                                intakeSubsystem.lower();
+
+                        }
+
+                        public void end(boolean x) {
+                               
+                                intakeSubsystem.stop();
+                        }
+
+                        public boolean isFinished() {
+                                return false;
+                        }
+                }); 
 
                 opLeftBumper.whileTrue(new Command() {
                         public void execute() {
@@ -274,6 +291,10 @@ public class RobotContainer {
                                 shooterPivotSubsystem.setPosition((x- 38) / ShooterConstants.degreePerRot);
 
 
+                        }
+
+                        public boolean isFinished(){
+                                return true;
                         }
                 });   
                 
