@@ -203,17 +203,12 @@ public class RobotContainer {
                 yShooterButton.whileTrue(new Command() {
                         public void execute() {
                                 
-                                intakeSubsystem.lower();
+                                shooterPivotSubsystem.setPosition((38 - 38) / ShooterConstants.degreePerRot);
 
-                        }
-
-                        public void end(boolean x) {
-                               
-                                intakeSubsystem.stop();
                         }
 
                         public boolean isFinished() {
-                                return false;
+                                return true;
                         }
                 }); 
 
